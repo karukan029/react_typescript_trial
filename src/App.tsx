@@ -4,15 +4,21 @@ import './App.css';
 // import { render } from '@testing-library/react';
 import Greets from './components/Greets';
 
-function App() {
-  const list = ['Patty','Rolley', 'Bobby'];
-  return (
-    <React.Fragment>
+// function App() {
+//   const list = ['Patty','Rolley', 'Bobby'];
+//   return (
+const list = ['Patty', 'Rolley', 'Bobby'];
+const App: React.FC = () => (
+  <>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Edit
+          {' '}
+          <code>src/App.tsx</code>
+          {' '}
+          and save to reload.
         </p>
         <a
           className="App-link"
@@ -26,15 +32,19 @@ function App() {
     </div>
     <ul>
       {list.map((name) => (
-        <li>Hello, {name}!</li>
+        <li>
+          Hello,
+          {name}
+          !
+        </li>
       ))}
     </ul>
     <Greets name="Patty" times={4}>
       {/* React.createElement() の第 3 引数children、暗黙のprops */}
       <span role="img" aria-label="rabbit">🐰</span>
     </Greets>
-    </React.Fragment>
-  );
-}
+  </>
+);
+// }
 
 export default App;
