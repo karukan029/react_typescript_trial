@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
+import Greets from './components/Greets';
 
 function App() {
   const list = ['Patty','Rolley', 'Bobby'];
@@ -24,11 +25,15 @@ function App() {
       </header>
     </div>
     <ul>
-    {list.map((name) => (
-      <li>Hello, {name}!</li>
-    ))}
-  </ul>
-  </React.Fragment>
+      {list.map((name) => (
+        <li>Hello, {name}!</li>
+      ))}
+    </ul>
+    <Greets name="Patty" times={4}>
+      {/* React.createElement() の第 3 引数children、暗黙のprops */}
+      <span role="img" aria-label="rabbit">🐰</span>
+    </Greets>
+    </React.Fragment>
   );
 }
 

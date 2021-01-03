@@ -4,7 +4,15 @@ type Props = {name: string; times? : number};
 // interface TProps {name: string; times? : number};
 
 const Greets: React.FunctionComponent<Props>= (props) => {
-    const { name, times = 1, children } = props;
-    // const tProps: TProps = {name: 'a',times: 5};
-    return ()
-}
+  const { name, times = 1, children } = props;
+  // const tProps: TProps = {name: 'a',times: 5};
+    return (
+      <React.Fragment>
+        {[...Array(times)].map((_, i)=> (
+          <p key={i}>Hello, {name}! {children}</p>
+        ))}
+      </React.Fragment>
+    );
+};
+
+export default Greets;
