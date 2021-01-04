@@ -1,47 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
+import CharacterList, { Character } from './CharacterList';
 import './App.css';
-// import { render } from '@testing-library/react';
-import Greets from './components/Greets';
 
-// function App() {
-//   const list = ['Patty','Rolley', 'Bobby'];
-//   return (
-const list = ['Patty', 'Rolley', 'Bobby'];
-const App: React.FC = () => (
-  <>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+const App: FC = () => {
+  const characters: Character[] = [
+    {
+      id: 1,
+      name: '桜木花道',
+      grade: 1,
+      height: 189.2,
+    },
+    {
+      id: 2,
+      name: '流川 楓',
+      grade: 1,
+      height: 187,
+    },
+    {
+      id: 3,
+      name: '宮城リョータ',
+      grade: 2,
+      height: 168,
+    },
+    {
+      id: 4,
+      name: '三井 寿',
+      grade: 3,
+    },
+    {
+      id: 5,
+      name: '赤木剛憲',
+      grade: 3,
+      height: 197,
+    },
+  ];
+
+  return (
+    <div className="container">
+      <header>
+        <h1>『SLAM DUNK』登場人物</h1>
       </header>
+      <CharacterList school="湘北高校" characters={characters} />
     </div>
-    <ul>
-      {list.map((name) => (
-        <li>
-          Hello,
-          {name}!
-        </li>
-      ))}
-    </ul>
-    <Greets name="Patty" times={4}>
-      {/* React.createElement() の第 3 引数children、暗黙のprops */}
-      <span role="img" aria-label="rabbit">
-        🐰
-      </span>
-    </Greets>
-  </>
-);
-// }
+  );
+};
 
 export default App;
