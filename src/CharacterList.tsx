@@ -27,7 +27,9 @@ const CharacterList: FC<Props> = (props) => {
               <Item.Header>{character.name}</Item.Header>
               <Item.Meta>{character.grade}年生</Item.Meta>
               <Item.Meta>
-                {character.height ? character.height : '???'}
+                {/* {character.height ? character.height : '???'} */}
+                {/* nullish coalescing 条件式がnullのとき、??の後ろの値を返す */}
+                {character.height ?? '???'}
                 cm
               </Item.Meta>
             </Item.Content>
