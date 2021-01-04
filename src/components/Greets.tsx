@@ -1,6 +1,6 @@
 import React from 'react';
 
-type Props = {name: string; times? : number};
+type Props = { name: string; times?: number };
 // interface TProps {name: string; times? : number};
 
 const Greets: React.FunctionComponent<Props> = (props) => {
@@ -9,14 +9,16 @@ const Greets: React.FunctionComponent<Props> = (props) => {
   // const tProps: TProps = {name: 'a',times: 5};
   return (
     <>
-      {[...Array(times)].map((_, i) => (
-        <p key={i}>
-          Hello,
-          {name}
-          !
-          {children}
-        </p>
-      ))}
+      {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        [...Array(times)].map((_, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <p key={i}>
+            Hello,
+            {name}!{children}
+          </p>
+        ))
+      }
     </>
   );
 };
