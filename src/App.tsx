@@ -1,48 +1,52 @@
-import React, { FC } from 'react';
-import CharacterList, { Character } from './CharacterList';
+import React, { Component, ReactElement } from 'react';
+import { Button, Card, Statistic } from 'semantic-ui-react';
 import './App.css';
 
-const App: FC = () => {
-  const characters: Character[] = [
-    {
-      id: 1,
-      name: '桜木花道',
-      grade: 1,
-      height: 189.2,
-    },
-    {
-      id: 2,
-      name: '流川 楓',
-      grade: 1,
-      height: 187,
-    },
-    {
-      id: 3,
-      name: '宮城リョータ',
-      grade: 2,
-      height: 168,
-    },
-    {
-      id: 4,
-      name: '三井 寿',
-      grade: 3,
-    },
-    {
-      id: 5,
-      name: '赤木剛憲',
-      grade: 3,
-      height: 197,
-    },
-  ];
-
-  return (
-    <div className="container">
-      <header>
-        <h1>『SLAM DUNK』登場人物</h1>
-      </header>
-      <CharacterList school="湘北高校" characters={characters} />
-    </div>
-  );
+type State = {
+  count: number;
 };
+
+class App extends Component<unknown, State> {
+  constructor(props: unknown) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  reset(): void {
+    this.setState({ count: 0 });
+  }
+
+  increment(): void {
+    this.setState((state) => ({ count: state.count + 1 }));
+  }
+
+  render(): ReactElement {
+    const { count } = this.state;
+
+    return (
+      <div className="container">
+        <header>
+          <h1>カウンター</h1>
+        </header>
+        <Card>
+          <Statistic className="number-board">
+            <Statistic.Label>count</Statistic.Label>
+            <Statistic.Value>{count}</Statistic.Value>
+          </Statistic>
+          <Card.Content>
+            <div className="ui two buttons">
+              <Button color="red" onClick={() => this.reset()}>
+                Reset
+              </Button>
+              <Button color="green" onClick={() => this.increment()}>
+                +1
+              </Button>
+            </div>
+          </Card.Content>
+        </Card>
+      </div>
+    );
+  }
+}
 
 export default App;
