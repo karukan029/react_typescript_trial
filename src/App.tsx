@@ -1,56 +1,65 @@
 import React, { Component, ReactElement } from 'react';
-import { Button, Card, Statistic } from 'semantic-ui-react';
+import { Button, Card, Icon, Statistic } from 'semantic-ui-react';
 import './App.css';
 
+const LIMIT = 60;
+
 type State = {
-  count: number;
+  timeLeft: number;
 };
 
-// unknown：プロパティを持てないオブジェクトの型←空オブジェクト{}はTypeScriptの解釈ではnull以外のあらゆるオブジェクトとなるためeslintのルール違反となる
 class App extends Component<unknown, State> {
+  timerId: NodeJS.Timer | null = null;
+
   constructor(props: unknown) {
     super(props);
-    this.state = { count: 0 };
+    this.state = { timeLeft: LIMIT };
   }
 
   reset = (): void => {
-    // reset(): void {
-    this.setState({ count: 0 });
+    this.setState({ timeLeft: LIMIT });
   };
 
-  increment = (): void => {
-    // increment(): void {
-    this.setState((state) => ({ count: state.count + 1 }));
+  tick = (): void => {
+    this.setState((prevState) => ({ timeLeft: prevState.timeLeft - 1 }));
   };
 
-  render(): ReactElement {
-    const { count } = this.state;
+  componentDidMount = (): void => {
+    this.timerId = setInterval(this.tick, 1000);
+  };
+
+  componentDidUpdate = (): void => {
+    const { timeLeft } = this.state;
+    if (timeLeft === 0) this.reset();
+  };
+
+  componentWillUnmount = (): void => {
+    if (this.timerId) clearInterval(this.timerId);
+  };
+
+  render = (): ReactElement => {
+    const { timeLeft } = this.state;
 
     return (
       <div className="container">
         <header>
-          <h1>カウンター</h1>
+          <h1>タイマー</h1>
         </header>
         <Card>
           <Statistic className="number-board">
-            <Statistic.Label>count</Statistic.Label>
-            <Statistic.Value>{count}</Statistic.Value>
+            <Statistic.Label>time</Statistic.Label>
+            <Statistic.Value>{timeLeft}</Statistic.Value>
           </Statistic>
           <Card.Content>
-            <div className="ui two buttons">
-              <Button color="red" onClick={() => this.reset()}>
-                Reset
-              </Button>
-              {/* <Button color="green" onClick={() => this.increment()}> */}
-              <Button color="green" onClick={this.increment}>
-                +1
-              </Button>
-            </div>
+            <Button color="red" fluid onClick={this.reset}>
+              <Icon name="redo" />
+              Reset
+            </Button>
           </Card.Content>
         </Card>
       </div>
     );
-  }
+  };
 }
 
 export default App;
