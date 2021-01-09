@@ -6,19 +6,22 @@ type State = {
   count: number;
 };
 
+// unknown：プロパティを持てないオブジェクトの型←空オブジェクト{}はTypeScriptの解釈ではnull以外のあらゆるオブジェクトとなるためeslintのルール違反となる
 class App extends Component<unknown, State> {
   constructor(props: unknown) {
     super(props);
     this.state = { count: 0 };
   }
 
-  reset(): void {
+  reset = (): void => {
+    // reset(): void {
     this.setState({ count: 0 });
-  }
+  };
 
-  increment(): void {
+  increment = (): void => {
+    // increment(): void {
     this.setState((state) => ({ count: state.count + 1 }));
-  }
+  };
 
   render(): ReactElement {
     const { count } = this.state;
@@ -38,7 +41,8 @@ class App extends Component<unknown, State> {
               <Button color="red" onClick={() => this.reset()}>
                 Reset
               </Button>
-              <Button color="green" onClick={() => this.increment()}>
+              {/* <Button color="green" onClick={() => this.increment()}> */}
+              <Button color="green" onClick={this.increment}>
                 +1
               </Button>
             </div>
